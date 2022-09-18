@@ -1,0 +1,9 @@
+{
+  "name": "sms-template-system",
+  "version": "1.0.0",
+  "description": "this is a sms template",
+  "main": "app.js",
+  "author": "shinas vb",
+  "license": "MIT",
+  "private": true
+}
