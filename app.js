@@ -1,9 +1,11 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
+const methodOverride = require('method-override');
+const userRoutes = require('./routes/user-routes');
 
-const userRoutes = require('./routes/user-routes')
+const app = express();
 
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
@@ -19,8 +21,9 @@ app.use((req, res, next) => {
 })
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
-    res.render('signin');
+    res.redirect('/users/signin');
 })
+
 
 app.use('/users', userRoutes);
 

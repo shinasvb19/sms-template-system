@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const validator = require("mongoose-unique-validator");
 
+const Schema = mongoose.Schema;
+
 const userSchema = new Schema({
     firstName: {
         type: String,
