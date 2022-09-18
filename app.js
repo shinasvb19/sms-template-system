@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+
+const userRoutes = require('./routes/user-routes')
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Contol-Allow-Orgin", "*");
@@ -17,8 +21,14 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     res.render('signin');
 })
-app.get('/signup', (req, res) => {
-    res.render('signup')
+
+app.use('/users', userRoutes);
+
+// app.get('/signup', (req, res) => {
+//     res.render('signup')
+// })
+app.get('/home', (req, res) => {
+    res.render('index');
 })
 
 app.get('*', (req, res, next) => {
