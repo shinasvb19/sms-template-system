@@ -8,5 +8,8 @@ router.get('/admin', userController.adminPage);
 router.get('/user', userController.userPage);
 router.get('/signin', userController.signPage);
 router.post('/signin', userController.login);
+router.get('/logout', userController.userLogout);
 router.delete('/:uid', userController.userDelete);
+router.post('/edit', userController.userUpdate);
+router.put('/update/:uid', userController.findUpdate);
 module.exports = router;

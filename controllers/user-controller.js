@@ -14,7 +14,6 @@ const signup = async (req, res, next) => {
     } catch (error) {
         console.log(error)
     }
-    console.log(user.toObject().password)
     res.redirect('/');
 }
 exports.signup = signup;
@@ -71,3 +70,27 @@ const userDelete = async (req, res, next) => {
     res.redirect('/users/admin');
 }
 exports.userDelete = userDelete;
+
+const userLogout = (req, res, next) => {
+    res.redirect('/users/signin')
+}
+exports.userLogout = userLogout;
+
+const userUpdate = async (req, res, next) => {
+    const updateId = await User.findById(req.body.userid)
+    res.render('edit', { updateId });
+    // console.log(updateId);
+}
+exports.userUpdate = userUpdate;
+
+const findUpdate = async (req, res, next) => {
+
+
+    const id = req.params.uid;
+    await User.findByIdAndUpdate(id, { $set: req.body });
+    //const user = new User(req.body);
+
+
+    res.redirect('/users/admin');
+}
+exports.findUpdate = findUpdate;
