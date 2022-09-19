@@ -30,6 +30,7 @@ const userPage = (req, res, next) => {
 exports.userPage = userPage;
 
 const signPage = (req, res, next) => {
+
     res.render('signin');
 }
 exports.signPage = signPage;
@@ -40,6 +41,10 @@ const login = async (req, res, next) => {
         user = await User.findOne({ email });
         if (email == user.email && password == user.password
         ) {
+            const id = user.id;
+            const userType = user.userType;
+            req.session.user = { id, userType };
+            // console.log(req.session.user);
             if (user.userType === 'user') {
                 res.redirect('/users/user')
             }
@@ -72,7 +77,9 @@ const userDelete = async (req, res, next) => {
 exports.userDelete = userDelete;
 
 const userLogout = (req, res, next) => {
-    res.redirect('/users/signin')
+    req.session.destroy(function (err) {
+        res.redirect('/users/signin');
+    });
 }
 exports.userLogout = userLogout;
 
