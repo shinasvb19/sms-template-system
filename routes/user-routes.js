@@ -15,4 +15,6 @@ router.get('/logout', userController.userLogout);
 router.delete('/:uid', userController.userDelete);
 router.post('/edit', userController.userUpdate);
 router.put('/update/:uid', userController.findUpdate);
+// router.get('/search', userController.search);
+router.post('/search', userController.searchPage);
 module.exports = router;

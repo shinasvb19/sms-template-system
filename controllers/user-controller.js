@@ -1,4 +1,5 @@
 const User = require("../models/user");
+let message = '';
 const signupPage = (req, res, next) => {
     res.render('signup');
 }
@@ -31,7 +32,8 @@ exports.userPage = userPage;
 
 const signPage = (req, res, next) => {
 
-    res.render('signin');
+    res.render('signin', { message });
+    message = "";
 }
 exports.signPage = signPage;
 const login = async (req, res, next) => {
@@ -55,7 +57,8 @@ const login = async (req, res, next) => {
         }
 
     } catch (error) {
-        console.log(error)
+        message = "invalid user"
+        res.redirect('/users/signin')
     }
 
 
@@ -101,3 +104,16 @@ const findUpdate = async (req, res, next) => {
     res.redirect('/users/admin');
 }
 exports.findUpdate = findUpdate;
+
+const searchPage = async (req, res, next) => {
+    let result = await User.find({ firstName: req.body.search });
+    console.log(result)
+    res.render('search', { result });
+}
+exports.searchPage = searchPage;
+
+// const search = (req, res) => {
+//     const result = '';
+//     res.render('search', { result });
+// }
+// exports.search = search;
