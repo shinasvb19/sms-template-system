@@ -6,6 +6,7 @@ const auth = (req, res, next) => {
         res.redirect("/users/signin");
         return next(err);
         req.userType = req.session.user.userType;
+
     }
     return next();
 };

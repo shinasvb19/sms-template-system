@@ -3,7 +3,6 @@ const { check } = require('express-validator');
 const userController = require("../controllers/user-controller");
 const auth = require("../utils/auth")
 const router = express.Router();
-
 router.get('/signup', userController.signupPage);
 router.get('/signin', userController.signPage);
 router.post('/signup', userController.signup);

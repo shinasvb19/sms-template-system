@@ -1,5 +1,6 @@
 const User = require("../models/user");
 let message = '';
+
 const signupPage = (req, res, next) => {
     res.render('signup');
 }
@@ -25,8 +26,13 @@ const adminPage = async (req, res, next) => {
 }
 exports.adminPage = adminPage;
 
-const userPage = (req, res, next) => {
+const userPage = async (req, res, next) => {
+    //res.send(req.session.id)
+    // const userDetails = await User.find({ email: req.session.email }, '-password');
     res.render('index');
+
+
+
 }
 exports.userPage = userPage;
 
@@ -45,8 +51,10 @@ const login = async (req, res, next) => {
         ) {
             const id = user.id;
             const userType = user.userType;
-            req.session.user = { id, userType };
-            // console.log(req.session.user);
+            req.session.user = { id: id, userType: userType };
+            //req.session.id = id;
+            //req.session.userType = userType;
+            //console.log(req.session.user.id);
             if (user.userType === 'user') {
                 res.redirect('/users/user')
             }

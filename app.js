@@ -21,10 +21,6 @@ app.use(
     })
 );
 
-
-
-
-
 app.use(function (req, res, next) {
     res.set(
         "Cache-Control",
